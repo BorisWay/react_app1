@@ -5,7 +5,12 @@
 
 .dialogsItems{
     padding:10px;
-    color:blue !important;
+}
+
+.dialogsItems img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
 }
 
 .dialogsItems .active {
