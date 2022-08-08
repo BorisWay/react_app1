@@ -1,5 +1,5 @@
 import React, { Profiler } from "react";
-import "./App.css";
+import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
@@ -20,13 +20,14 @@ const App = (props) => {
             <Route
               path="/dialogs/*"
               element={
-                <Dialogs state={props.appState.dialogsPage} />} 
+                <Dialogs store={props.store}/>}  // ok
             />
             <Route
               path="/profile"
               element={
-                <Profile profilePage={props.appState.profilePage}
-                addPost={props.addPost} updateNewPostText={props.updateNewPostText} />}
+                <Profile profilePage={props.state.profilePage}
+                dispatch={props.dispatch}
+                 />}
             />
             <Route path="/music" element={<Music />} />
             <Route path="/news" element={<News />} />

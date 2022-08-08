@@ -1,3 +1,7 @@
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
+import sidebarReducer from "./sidebar-reducer";
+
 let store = {
   _state: {
     profilePage: {
@@ -8,6 +12,7 @@ let store = {
       newPostText: 'bottom text'
     },
     dialogsPage: {
+      newMessageBody: '',
       messages: [
         { id: 1, message: "Hi" },
         { id: 2, message: "How r u?" },
@@ -24,6 +29,7 @@ let store = {
         { id: 5, name: "Ilya" },
         { id: 6, name: "Dasha" },
       ],
+      
     },
     sidebar: {
       friendsList: [
@@ -42,28 +48,24 @@ let store = {
     return this._state;
   },
 
-  addPost(){
-    let newPost = {
-      id: this._state.profilePage.posts.length+1,
-      message: this._state.profilePage.newPostText,
-      likesCount: 0
-    };
-  
-  
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText="";
-    this._callSubscriber(this._state);
-  },
-
-  updateNewPostText (newText) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
-  },
-
   subscribe (observer) {
     this._callSubscriber = observer; // наблюдатель
+  },
+  
+  dispatch(action){ // должно быть свойство {type: ''}
+
+    profileReducer(this._state.profilePage, action);
+
+    dialogsReducer(this._state.dialogsPage, action);
+    sidebarReducer(this._state.sidebar, action);
+
+    this._callSubscriber(this._state);
   }
 }
+
+
+
+
 
 
 
