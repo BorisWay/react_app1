@@ -1,9 +1,9 @@
 import ReactDOM from "react-dom/client";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state, { subscribe } from "./redux/state";
+import state, { subscribe } from "./redux/store";
 import App from './App';
-import store, { addPost, updateNewPostText } from "./redux/state";
+import store from "./redux/redux-store";
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 
@@ -23,9 +23,12 @@ rerenderEntireTree(store.getState());
 
 //subscribe(state);
 
-store.subscribe(rerenderEntireTree);
+// store.subscribe(rerenderEntireTree);
 
-
+store.subscribe( () => {
+  let state = store.getState();
+  rerenderEntireTree(state);
+});
 
 
 // If you want to start measuring performance in your app, pass a function
